@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import messagebox
 from PIL import Image, ImageTk
 class Product:
     def __init__(self, name, price, quantity):
@@ -28,7 +27,6 @@ class ShoppingCart:
 
     def clear_cart(self):
         self.products.clear()
-        return "Grozi ir iztukšoti"
 
 class App:
     def __init__(self, master):
@@ -38,7 +36,6 @@ class App:
         self.master.configure(bg="#fadadd")
         self.cart = ShoppingCart()
 
-        # Create input fields
         self.name_label = tk.Label(master, text="Produkta nosaukums: ", bg="#fdfd66")
         self.name_label.grid(row=0, column=0, padx=5, pady=5)
 
@@ -57,25 +54,21 @@ class App:
         self.quantity_entry = tk.Entry(master)
         self.quantity_entry.grid(row=2, column=1)
 
-        # Add product button
         self.add_button = tk.Button(master, text="Pievienot grozam", command=self.add_to_cart)
         self.add_button.grid(row=3, columnspan=2, pady=10)
         self.add_button.configure(bg="#5bb450", fg="white")
 
-        # Listbox to show cart items
-        self.cart_listbox = tk.Listbox(master, width=50)
+        self.cart_listbox = tk.Listbox(master, width=50, bg="#fadadd")
         self.cart_listbox.grid(row=4, columnspan=2, padx=5, pady=5)
 
-        # Label to display total price
-        self.total_label = tk.Label(master, text="Kopējā summa: 0.00 EUR", bg="#fcd9d9")
+        self.total_label = tk.Label(master, text="Kopējā summa: 0.00 EUR", bg="#dafaf7")
         self.total_label.grid(row=5, columnspan=2)
 
         self.add_button1 = tk.Button(master, text="Iztīrīt grozu", command=self.clear_cart1)
         self.add_button1.grid(row = 6, columnspan=2)
         self.add_button1.configure(bg="#ff2c2c", fg="white")
 
-        self.image = Image.open("mrlb.png")  # Replace with your image path
-        #self.image = self.image.resize((100, 100))  # Resize if necessary
+        self.image = Image.open("mrlb.png")
         self.image_tk = ImageTk.PhotoImage(self.image)
         self.image_label = tk.Label(master, image=self.image_tk, bg="#fadadd")
         self.image_label.grid(row=7, columnspan=2, pady=10)
@@ -91,7 +84,6 @@ class App:
         self.cart_listbox.insert(tk.END, f"{name}: {price:.2f} EUR, {quantity} gab")
         self.update_total_price()
 
-        # Clear input fields
         self.name_entry.delete(0, tk.END)
         self.price_entry.delete(0, tk.END)
         self.quantity_entry.delete(0, tk.END)
